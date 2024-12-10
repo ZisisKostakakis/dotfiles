@@ -8,6 +8,7 @@ dependencies=(
   lazygit
   tmux
   node
+  dockutil
   ca-certificates
   cffi
   cryptography
@@ -54,3 +55,21 @@ brew install --cask rectangle
 for f in "${dependencies[@]}"; do
   brew install "$f"
 done
+
+dockutil --remove Music
+dockutil --remove Safari
+dockutil --remove Launchpad
+dockutil --remove TV
+dockutil --remove Calendar
+dockutil --remove Contacts
+dockutil --remove Messages
+dockutil --remove Mail
+dockutil --remove Maps
+dockutil --remove Photos
+dockutil --remove FaceTime
+dockutil --remove Reminders
+dockutil --remove Freeform
+dockutil --remove News
+dockutil --remove "App Store"
+dockutil --remove "System Settings"
+dockutil --remove "iPhone Mirroring"
