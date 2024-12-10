@@ -27,7 +27,6 @@ dotfiles=(
   zshrc
   zprofile
   zshrc.pre-oh-my-zsh
-  oh-my-zsh
 )
 
 for f in "${dotfiles[@]}"; do
@@ -189,40 +188,34 @@ if defaults read com.apple.finder &>/dev/null; then
 fi
 
 # Function to remove a specific app from the Dock
-remove_app_from_dock() {
-  local app_name="$1"
-  defaults write com.apple.dock persistent-apps -array "$(defaults read com.apple.dock persistent-apps |
-    plutil -convert json - -o - | jq 'map(select(.tile-data.file-label != "'"$app_name"'"))' |
-    plutil -convert xml1 - -o -)"
-  echo "Removed $app_name from the Dock"
-}
-
-remove_app_from_dock "Safari"
-remove_app_from_dock "Mail"
-remove_app_from_dock "Messages"
-remove_app_from_dock "Maps"
-remove_app_from_dock "Photos"
-remove_app_from_dock "FaceTime"
-remove_app_from_dock "Calendar"
-remove_app_from_dock "Contacts"
-remove_app_from_dock "Reminders"
-remove_app_from_dock "Notes"
-remove_app_from_dock "Freeform"
-remove_app_from_dock "TV" # Apple TV
-remove_app_from_dock "Music" # Apple Music
-remove_app_from_dock "News"
-remove_app_from_dock "App Store"
-remove_app_from_dock "Settings"
-remove_app_from_dock "Screen Mirroring" # iPhone Mirroring
-
-killall Dock Finder
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-git clone "https://github.com/zsh-users/zsh-syntax-highlighting.git" "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
-git clone "https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv.git" "$ZSH_CUSTOM/plugins/autoswitch_virtualenv"
-git clone "https://github.com/Aloxaf/fzf-tab" "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab"
-git clone "https://github.com/MichaelAquilina/zsh-you-should-use.git" "$ZSH_CUSTOM/plugins/you-should-use"
-git clone "https://github.com/zsh-users/zsh-autosuggestions" "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+#remove_app_from_dock() {
+#  local app_name="$1"
+#  defaults write com.apple.dock persistent-apps -array "$(defaults read com.apple.dock persistent-apps |
+#    plutil -convert json - -o - | jq 'map(select(.tile-data.file-label != "'"$app_name"'"))' |
+#    plutil -convert xml1 - -o -)"
+#  echo "Removed $app_name from the Dock"
+#}
+#
+#remove_app_from_dock "Safari"
+#remove_app_from_dock "Mail"
+#remove_app_from_dock "Messages"
+#remove_app_from_dock "Maps"
+#remove_app_from_dock "Photos"
+#remove_app_from_dock "FaceTime"
+#remove_app_from_dock "Calendar"
+#remove_app_from_dock "Contacts"
+#remove_app_from_dock "Reminders"
+#remove_app_from_dock "Notes"
+#remove_app_from_dock "Freeform"
+#remove_app_from_dock "TV" # Apple TV
+#remove_app_from_dock "Music" # Apple Music
+#remove_app_from_dock "News"
+#remove_app_from_dock "App Store"
+#remove_app_from_dock "Settings"
+#remove_app_from_dock "Screen Mirroring" # iPhone Mirroring
+#
+#killall Dock Finder
+#
 
 if [[ -t 1 ]]; then
   vim '+PlugInstall --sync' +qa
