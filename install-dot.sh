@@ -187,11 +187,19 @@ if defaults read com.apple.finder &>/dev/null; then
   echo 'done: killing Dock and Finder'
 fi
 
-
 if [[ -t 1 ]]; then
   vim '+PlugInstall --sync' +qa
 else
   printf "may need to run:\n\tvim +'PlugInstall --sync' +qa\n"
 fi
+
+# For lazygit
+cat <<EOF >~/Library/Application\ Support/lazygit/config.yml
+gui:
+  theme:
+    primaryColor: "purple"
+    secondaryColor: "lightgray"
+    lightTheme: false
+EOF
 
 true
