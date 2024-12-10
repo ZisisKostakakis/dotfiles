@@ -13,7 +13,4 @@ https://crystalidea.com/macs-fan-control/download
 
 screen brush - App Store
 paste - App Store
-
 remote for mac - google
-
-lazy git config.yaml missing add it
