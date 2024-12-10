@@ -24,6 +24,7 @@ dotfiles=(
   zshrc
   zprofile
   zshrc.pre-oh-my-zsh
+  oh-my-zsh
 )
 
 for f in "${dotfiles[@]}"; do
