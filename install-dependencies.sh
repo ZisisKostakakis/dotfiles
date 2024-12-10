@@ -7,6 +7,7 @@ dependencies=(
   fzf
   lazygit
   tmux
+  node
   ca-certificates
   cffi
   cryptography
