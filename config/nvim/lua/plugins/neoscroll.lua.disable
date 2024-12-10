@@ -1,0 +1,22 @@
+return { { "karb94/neoscroll.nvim",
+    opts = {
+      mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
+      performance_mode = true, -- Enable Performance Mode
+    },
+    config = function()
+      local neoscroll = require("neoscroll")
+
+      -- Setup Neoscroll with performance mode enabled
+      neoscroll.setup({
+        mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "zt", "zz", "zb" },
+        hide_cursor = true,
+        stop_eof = true,
+        respect_scrolloff = false,
+        cursor_scrolls_alone = true,
+        duration_multiplier = 0.5,
+        easing = "quadratic",
+        --performance_mode = true, -- This is the key setting
+      })
+    end,
+  },
+}
