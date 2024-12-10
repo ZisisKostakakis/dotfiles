@@ -19,8 +19,8 @@ dotfiles=(
   tmux
   p10k.zsh
   tmux.conf
-  #vimrc
-  #vim
+  vimrc
+  vim
   zshrc
   zprofile
   zshrc.pre-oh-my-zsh
@@ -30,9 +30,6 @@ for f in "${dotfiles[@]}"; do
   [[ -d ~/.$f && ! -L ~/.$f ]] && rm -r ~/."$f"
   symlink "$PWD/$f" ~/."$f"
 done
-
-# neovim
-symlink ~/.vim ~/.config/nvim
 
 # Mac OS X NSUserDefaults modifications
 # Some based on https://github.com/mathiasbynens/dotfiles/blob/master/.osx

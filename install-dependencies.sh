@@ -1,15 +1,19 @@
 dependencies=(
+  neovim
+  python@3.12
   docker
   awscli
   bat
+  fzf
+  lazygit
+  tmux
   ca-certificates
   cffi
   cryptography
+  ripgrep
   dust
   fd
-  fzf
   gettext
-  lazygit
   libevent
   libgit2
   libimobiledevice
@@ -30,16 +34,12 @@ dependencies=(
   mpdecimal
   msgpack
   ncurses
-  neovim
   oniguruma
   openssl@3
   pcre2
   pycparser
-  python@3.12
   readline
-  ripgrep
   sqlite
-  tmux
   tree-sitter
   unibilium
   utf8proc
