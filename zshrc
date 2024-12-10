@@ -178,3 +178,4 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 complete -C '/opt/homebrew/bin/aws_completer' aws
 eval "$(direnv hook zsh)"
 
+source /usr/local/share/powerlevel10k/powerlevel10k.zsh-theme
