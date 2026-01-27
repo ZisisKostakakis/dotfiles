@@ -1,13 +1,13 @@
-export VIM_HOME=/usr/local/Cellar/vim/8.2.2100/
-
-export PATH=$PATH:$VIM_HOME/bin
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+export VIM_HOME=/usr/local/Cellar/vim/8.2.2100/
+
+export PATH=$PATH:$VIM_HOME/bin
 
 if [[ -f "/opt/homebrew/bin/brew" ]]; then
   # If you're using macOS, you'll want this enabled
@@ -109,14 +109,14 @@ zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git 
+plugins=(git
     zsh-syntax-highlighting
     zsh-autosuggestions
     web-search
     z
     you-should-use
     copyfile
-    copypath 
+    copypath
     docker
     aws
     gitfast
@@ -129,7 +129,7 @@ plugins=(git
     flutter
     direnv
     tmux
-    autoswitch_virtualenv) 
+    autoswitch_virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 # User configuration
@@ -161,6 +161,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias python="python3"
+alias gprom="git pull --rebase origin main"
+alias co="checkout"
+#
+# "Cheap" mode - for 80% of tasks
+alias cfast='claude --model haiku'
+
+# "Deep" mode - for complex architecture/debugging
+alias cdeep='claude --model sonnet'
 
 # Created by `pipx` on 2024-11-23 20:13:48
 export PATH="$PATH:/Users/zisiskostakakis/.local/bin"
@@ -174,6 +182,10 @@ source <(fzf --zsh)
 zstyle ':completion:*:*:aws:*' file-patterns '*(-/)'
 zstyle ':completion:*:*:aws:*' use-cache yes
 
-source "$HOME/.sdkman/bin/sdkman-init.sh"
 complete -C '/opt/homebrew/bin/aws_completer' aws
-eval "$(direnv hook zsh)"
+eval "$(direnv hook zsh)" >> /dev/null 2>&1
+ssh-add ~/.ssh/m4-air-2025 >> /dev/null 2>&1
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"

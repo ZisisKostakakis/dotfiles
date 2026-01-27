@@ -1,2 +1,8 @@
 vim/*
 config/iterm2/*
+.aider*
+config/atuin/
+config/configstore/
+config/gh/
+config/uv/
+config/fish/
