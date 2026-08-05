@@ -18,7 +18,6 @@ symlink() {
 
 # Link dotfiles
 dotfiles=(
-  config
   tmux
   p10k.zsh
   tmux.conf
@@ -32,6 +31,21 @@ dotfiles=(
 for f in "${dotfiles[@]}"; do
   [[ -d ~/.$f && ! -L ~/.$f ]] && rm -r ~/."$f"
   symlink "$PWD/$f" ~/."$f"
+done
+
+mkdir -p "$HOME/.config"
+configs=(
+  nvim
+  karabiner
+  zellij
+)
+
+for f in "${configs[@]}"; do
+  if [[ -e "$HOME/.config/$f" && ! -L "$HOME/.config/$f" ]]; then
+    printf 'refusing to replace existing %s\n' "$HOME/.config/$f" >&2
+    continue
+  fi
+  symlink "$PWD/config/$f" "$HOME/.config/$f"
 done
 
 # Mac OS X NSUserDefaults modifications

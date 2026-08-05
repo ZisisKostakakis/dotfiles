@@ -2,6 +2,7 @@ vim/*
 config/iterm2/*
 .aider*
 config/atuin/
+config/karabiner/automatic_backups/
 config/configstore/
 config/gh/
 config/uv/
