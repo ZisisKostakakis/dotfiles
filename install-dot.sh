@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # Install all files to ~ by symlinking them,
 # this way, updating them is as simple as git pull
 
@@ -7,27 +9,28 @@ defaults() {
   command defaults "$@"
 }
 
-git submodule init
-git submodule update
+refused=0
 
 # verbose ln, because `ln -v` is not portable
 symlink() {
+  if [[ -e "$2" && ! -L "$2" ]]; then
+    printf 'refusing to replace existing %s\n' "$2" >&2
+    refused=$((refused + 1))
+    return 1
+  fi
+  mkdir -p "$(dirname "$2")"
   printf '%55s -> %s\n' "${1/#$HOME/\~}" "${2/#$HOME/\~}"
-  ln -nsf "$@"
+  ln -sfn "$1" "$2"
 }
 
 # Link dotfiles
 dotfiles=(
-  tmux
   p10k.zsh
-  tmux.conf
   zshrc
   zprofile
-  zshrc.pre-oh-my-zsh
 )
 
 for f in "${dotfiles[@]}"; do
-  [[ -d ~/.$f && ! -L ~/.$f ]] && rm -r ~/."$f"
   symlink "$PWD/$f" ~/."$f"
 done
 
@@ -39,12 +42,23 @@ configs=(
 )
 
 for f in "${configs[@]}"; do
-  if [[ -e "$HOME/.config/$f" && ! -L "$HOME/.config/$f" ]]; then
-    printf 'refusing to replace existing %s\n' "$HOME/.config/$f" >&2
-    continue
-  fi
   symlink "$PWD/config/$f" "$HOME/.config/$f"
 done
+
+for f in explore gh-reader runbook executor; do
+  symlink "$PWD/config/claude/agents/$f.md" "$HOME/.claude/agents/$f.md"
+  symlink "$PWD/config/codex/agents/$f.toml" "$HOME/.codex/agents/$f.toml"
+done
+
+# Remove dangling links to files this repo no longer tracks
+for stale in ~/.tmux.conf ~/.tmux; do
+  [[ -L "$stale" && ! -e "$stale" ]] && rm -- "$stale"
+done
+
+symlink "$PWD/config/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+symlink "$PWD/config/claude/settings.json" "$HOME/.claude/settings.json"
+symlink "$PWD/config/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
+symlink "$PWD/bin/claude-notify" "$HOME/.local/bin/claude-notify"
 
 # Mac OS X NSUserDefaults modifications
 # Some based on https://github.com/mathiasbynens/dotfiles/blob/master/.osx
@@ -124,4 +138,9 @@ gui:
     lightTheme: false
 EOF
 
-true
+if (( refused )); then
+  printf '\n%d file(s) not linked; move them aside and re-run\n' "$refused" >&2
+  exit 1
+fi
+
+exit 0
