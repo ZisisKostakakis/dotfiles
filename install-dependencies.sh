@@ -1,60 +1,52 @@
 dependencies=(
-  neovim
-  python@3.12
-  docker
+  ansible
+  aws-cdk
   awscli
   bat
-  fzf
-  lazygit
-  tmux
-  node
+  direnv
   dockutil
-  ca-certificates
-  cffi
-  cryptography
-  ripgrep
   dust
   fd
-  gettext
-  libevent
-  libgit2
+  fzf
+  gh
+  git
+  git-filter-repo
+  gitleaks
+  go
+  graphviz
+  htop
+  iperf3
+  iproute2mac
+  jq
+  lazygit
   libimobiledevice
-  libimobiledevice-glue
-  libomp
-  libplist
-  libssh2
-  libtasn1
-  libunistring
-  libusbmuxd
-  libuv
-  libvterm
-  lpeg
   lua
-  luajit
   luarocks
-  luv
-  mpdecimal
-  msgpack
-  ncurses
-  oniguruma
-  openssl@3
-  pcre2
-  pycparser
-  readline
-  sqlite
+  mole
+  mpv
+  neovim
+  nmap
+  pipx
+  poetry
+  python@3.13
+  ripgrep
+  ruby
+  stripe-cli
+  tailscale
+  television
+  terraform
+  trash
   tree-sitter
-  unibilium
-  utf8proc
-  xz)
+  trufflehog
+  uv
+  zellij
+)
 
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-brew install --cask alt-tab
-brew install --cask rectangle
+brew install --cask docker-desktop ghostty karabiner-elements rectangle
 
-for f in "${dependencies[@]}"; do
-  brew install "$f"
-done
+brew install "${dependencies[@]}"
 
 dockutil --remove Music
 dockutil --remove Safari
