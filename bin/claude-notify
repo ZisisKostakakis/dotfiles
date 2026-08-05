@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+IFS=$'\t' read -r title message < <(
+  jq -r '[(.title // "Claude Code"), (.message // .notification // .prompt // "Claude needs your attention")] | @tsv'
+)
+
+/usr/bin/osascript - "$title" "$message" <<'APPLESCRIPT'
+on run argv
+  display notification (item 2 of argv) with title (item 1 of argv)
+end run
+APPLESCRIPT

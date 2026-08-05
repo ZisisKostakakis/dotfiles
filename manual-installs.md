@@ -14,3 +14,11 @@ https://crystalidea.com/macs-fan-control/download
 screen brush - App Store
 paste - App Store
 remote for mac - google
+
+## Agent workflow
+
+Install these from their official documentation, then verify them locally:
+
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview): `claude --version`
+- [Codex CLI](https://developers.openai.com/codex/cli/): `codex --version`
+- [Atuin](https://docs.atuin.sh/): `atuin --version`

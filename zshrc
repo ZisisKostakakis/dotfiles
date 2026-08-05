@@ -66,12 +66,6 @@ alias brewup='brew update && brew upgrade --formula'
 alias python="python3"
 alias gprom="git pull --rebase origin main"
 alias co="checkout"
-#
-# "Cheap" mode - for 80% of tasks
-alias cfast='claude --model haiku'
-
-# "Deep" mode - for complex architecture/debugging
-alias cdeep='claude --model sonnet'
 
 # Created by `pipx` on 2024-11-23 20:13:48
 export PATH="$PATH:/Users/zisiskostakakis/.local/bin"
@@ -90,9 +84,10 @@ if (( $+commands[aws_completer] )); then
 fi
 ssh-add ~/.ssh/m4-air-2025 >> /dev/null 2>&1
 
-. "$HOME/.atuin/bin/env"
-
-eval "$(atuin init zsh)"
+[[ -r "$HOME/.atuin/bin/env" ]] && . "$HOME/.atuin/bin/env"
+if (( $+commands[atuin] )); then
+  eval "$(atuin init zsh)"
+fi
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 
 # bun completions

@@ -1,9 +1,13 @@
-Run with the following
-1. install-dependencies.sh
-2. install-oh-my-zsh.sh
-3. install-dot.sh
+# dotfiles
 
-Pull down the brew deps
-Remove Apps from Dock
-Install oh-my-zsh and plugins
-Symlink existing configuration
+From the repository root:
+
+```sh
+./install-dependencies.sh
+./install-oh-my-zsh.sh
+./install-dot.sh
+./check
+```
+
+`install-dot.sh` links tracked files into your home directory and refuses to
+replace real files.

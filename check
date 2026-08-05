@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+zsh_files=(p10k.zsh zprofile zshrc)
+bash_files=(
+  check
+  bin/claude-notify
+  install-dependencies.sh
+  install-dot.sh
+  install-oh-my-zsh.sh
+)
+sources=(
+  p10k.zsh
+  zprofile
+  zshrc
+  config/nvim
+  config/karabiner
+  config/zellij
+  config/claude/CLAUDE.md
+  config/claude/settings.json
+  config/claude/agents/explore.md
+  config/claude/agents/gh-reader.md
+  config/claude/agents/runbook.md
+  config/claude/agents/executor.md
+  config/codex/AGENTS.md
+  config/codex/agents/explore.toml
+  config/codex/agents/gh-reader.toml
+  config/codex/agents/runbook.toml
+  config/codex/agents/executor.toml
+  bin/claude-notify
+)
+
+for file in "${zsh_files[@]}"; do
+  zsh -n "$file"
+done
+
+for file in "${bash_files[@]}"; do
+  bash -n "$file"
+done
+
+jq empty config/karabiner/karabiner.json
+jq empty config/claude/settings.json
+git diff --check
+
+for source in "${sources[@]}"; do
+  [[ -e "$source" ]] || {
+    printf 'missing install source: %s\n' "$source" >&2
+    exit 1
+  }
+done
